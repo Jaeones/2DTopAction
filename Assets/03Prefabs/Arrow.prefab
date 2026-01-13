@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4376675075804643639}
   - component: {fileID: 2202972086226859519}
   - component: {fileID: 2150544977369825846}
+  - component: {fileID: 1050837383361697311}
   m_Layer: 11
   m_Name: Arrow
   m_TagString: Arrow
@@ -156,3 +157,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1050837383361697311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7565577775372369789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b9cbf0c0a0dee64fbb1ca863f8c9a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArrowController
+  deleteTime: 2
