@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 3
   tags:
   - Arrow
+  - Door
+  - Exit
+  - Item
+  - ItemBox
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -15,7 +15,7 @@ public class ArrowController : MonoBehaviour
     {
         transform.SetParent(collision.transform);
 
-        GetComponent<Collider>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
         GetComponent<Rigidbody2D>().simulated = false;
     }
 }
