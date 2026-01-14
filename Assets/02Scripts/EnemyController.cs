@@ -34,6 +34,8 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
+        if(hp <= 0) { return; }
+
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
@@ -78,10 +80,10 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
-                axisH = 0;
-                axisV = 0;
+                isActive = false;
                 rb.linearVelocity = Vector2.zero;
                 animator.Play("EnemyDown");
+                oldAni = "EnemyDown";
             }
         }
     }
@@ -107,6 +109,7 @@ public class EnemyController : MonoBehaviour
             hp--;
             if (hp <= 0)
             {
+                isActive = false;
                 GetComponent<CircleCollider2D>().enabled = false;
                 rb.linearVelocity = Vector2.zero;
                 animator.Play(DeadAni);
