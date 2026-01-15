@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        hp = PlayerPrefs.GetInt("PlayerHp");
         rb = GetComponent<Rigidbody2D>();
         animator = rb.GetComponent<Animator>();
         oldAni = downAni;

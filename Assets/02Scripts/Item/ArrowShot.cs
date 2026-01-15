@@ -41,7 +41,7 @@ public class ArrowShot : MonoBehaviour
         
     }
 
-    private void Attack()
+    public void Attack()
     {
         if(ItemKeeper.hasArrows > 0 && inAttack == false)
         {

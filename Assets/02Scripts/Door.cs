@@ -14,6 +14,8 @@ public class Door : MonoBehaviour
             {
                 ItemKeeper.hasKeys--;
                 Destroy(this.gameObject);
+
+                SaveDataManager.SetArrangeld(arrangeld, gameObject.tag);
             }
         }
     }

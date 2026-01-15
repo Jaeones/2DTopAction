@@ -110,8 +110,9 @@ public class EnemyController : MonoBehaviour
                 GetComponent<CircleCollider2D>().enabled = false;
                 rb.linearVelocity = Vector2.zero;
                 animator.Play(DeadAni);
-
                 Destroy(gameObject, 1f);
+
+                SaveDataManager.SetArrangeld(arrangeId, gameObject.tag);
             }
         }
     }

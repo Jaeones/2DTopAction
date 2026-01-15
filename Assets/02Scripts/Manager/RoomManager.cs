@@ -43,6 +43,18 @@ public class RoomManager : MonoBehaviour
     public static void ChangeScene(string sceneName, int doorNumber)
     {
         doorNum = doorNumber;
+        string nowScene = PlayerPrefs.GetString("LastScene");
+        if (nowScene != "")
+        {
+            SaveDataManager.SaveArrangeData(nowScene);
+        }
+
+        PlayerPrefs.SetString("LastScene", sceneName);
+        PlayerPrefs.SetInt("LastDoor", doorNum);
+        ItemKeeper.SaveItem();
+        
+            
+        
         SceneManager.LoadScene(sceneName);
     }
 }
