@@ -10,6 +10,7 @@ TagManager:
   - Item
   - ItemBox
   - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -23,8 +24,8 @@ TagManager:
   - 
   - Player
   - Arrow
-  - 
-  - 
+  - Enemy
+  - Bullet
   - 
   - 
   - 

@@ -27,11 +27,11 @@ public class RoomManager : MonoBehaviour
                 }
                 else if (exit.exitDirection == ExitDirection.left)
                 {
-                    y -= 1;
+                    x -= 1;
                 }
                 else if (exit.exitDirection == ExitDirection.right)
                 {
-                    y += 1;
+                    x += 1;
                 }
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
                 player.transform.position = new Vector3(x, y, 0);

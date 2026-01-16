@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void GetDamage(GameObject enemy)
+    public void GetDamage(GameObject enemy)
     {
         if (gameState == "playing")
         {

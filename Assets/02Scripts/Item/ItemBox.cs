@@ -23,6 +23,8 @@ public class ItemBox : MonoBehaviour
             {
                 Instantiate(itemPrefabs, transform.position, Quaternion.identity);
             }
+
+            SaveDataManager.SetArrangeld(arrangeld, gameObject.tag);
         }
     }
 }

@@ -114,7 +114,7 @@ public class UIManager : MonoBehaviour
         Invoke("GoToTitle", 3f);
     }
 
-    void GoToTitle()
+    public void GoToTitle()
     {
         PlayerPrefs.DeleteKey("LastScene");
         SceneManager.LoadScene("Title");

@@ -46,7 +46,7 @@ public class SaveDataManager : MonoBehaviour
                         Door door = obj.GetComponent<Door>();
                         if(door.arrangeld == savedata.arrangeId)
                         {
-                            Destroy(door);      //arrangeId가 같다면 제거
+                            Destroy(door.gameObject);      //arrangeId가 같다면 제거
                         }
                     }
                     else if(objTag == "ItemBox")
@@ -63,7 +63,7 @@ public class SaveDataManager : MonoBehaviour
                         ItemData item = obj.GetComponent<ItemData>();
                         if(item.arrageId == savedata.arrangeId)
                         {
-                            Destroy(item);
+                            Destroy(item.gameObject);
                         }
                     }
 
@@ -104,7 +104,8 @@ public class SaveDataManager : MonoBehaviour
         savedata.objTag = objTag;           //tag 기록
 
         //SaveData 추가
-        newSaveDatas[arrangeDataList.saveDatas.Length + 1] = savedata;
+        //newSaveDatas[arrangeDataList.saveDatas.Length + 1] = savedata;
+        newSaveDatas[arrangeDataList.saveDatas.Length] = savedata;
         arrangeDataList.saveDatas = newSaveDatas;
 
     }
