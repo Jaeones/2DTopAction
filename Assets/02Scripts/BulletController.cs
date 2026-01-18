@@ -3,7 +3,6 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     public float deleteTime = 3f;
-    PlayerController playerController;
 
     private void Start()
     {
@@ -13,7 +12,14 @@ public class BulletController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        playerController.GetDamage(collision.gameObject);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+            if (playerController != null)
+            {
+                playerController.GetDamage(collision.gameObject);
+            }
+        }
         Destroy(gameObject);
     }
 }

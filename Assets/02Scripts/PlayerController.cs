@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     bool isMoving = false;
 
-    //µ¥¹ÌÁö Ã³¸®
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
     public static int hp = 3;
     public static string gameState;
     bool inDamaged = false;
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // µ¥¹ÌÁö ÀÔÀº »óÅÂ(inDamaged)ÀÏ ¶§µµ Å° ÀÔ·ÂÀ» ¸·±â À§ÇØ Á¶°Ç Ãß°¡
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(inDamaged)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å° ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
         if (gameState != "playing" || inDamaged)
         {
             return;
@@ -47,15 +47,21 @@ public class PlayerController : MonoBehaviour
 
         if (isMoving == false)
         {
-            axisH = Input.GetAxisRaw("Horizontal"); // ¹İÀÀ¼ºÀ» À§ÇØ Raw ±ÇÀå (¿øÇÏ½Ã¸é GetAxis·Î À¯Áö °¡´É)
+            axisH = Input.GetAxisRaw("Horizontal"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Raw ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½Ï½Ã¸ï¿½ GetAxisï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
             axisV = Input.GetAxisRaw("Vertical");
+            
+            // ëŒ€ê°ì„  ì´ë™ ë°©ì§€: ìˆ˜í‰ê³¼ ìˆ˜ì§ ì…ë ¥ì´ ë™ì‹œì— ìˆì„ ë•Œ ìˆ˜í‰ ìš°ì„ 
+            if (axisH != 0 && axisV != 0)
+            {
+                axisV = 0; // ìˆ˜ì§ ì…ë ¥ ë¬´ì‹œ
+            }
         }
 
-        // [±âÁ¸ ÄÚµå À¯Áö] Å° ÀÔ·ÂÀ¸·Î ÀÌµ¿°¢µµ ±¸ÇÏ±â
+        // [ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½] Å° ï¿½Ô·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½
         Vector2 fromPt = rb.position;
         Vector2 toPt = new Vector2(fromPt.x + axisH, fromPt.y + axisV);
 
-        // ÀÔ·ÂÀÌ ÀÖÀ» ¶§¸¸ °¢µµ °»½Å (Á÷¼± ÀÌµ¿ ¹ö±× ¼öÁ¤ Æ÷ÇÔ)
+        // ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
         if (axisH != 0 || axisV != 0)
         {
             angleZ = GetAngle(fromPt, toPt);
@@ -77,7 +83,7 @@ public class PlayerController : MonoBehaviour
                 nowAni = leftAni;
             }
 
-            //¾Ö´Ï¸ŞÀÌ¼Ç ÀüÈ¯
+            //ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½È¯
             if (nowAni != oldAni)
             {
                 oldAni = nowAni;
@@ -90,7 +96,7 @@ public class PlayerController : MonoBehaviour
     {
         if (gameState != "playing") { return; }
 
-        //µ¥¹ÌÁö ¹Ş¾ÒÀ» ¶§ ¿¬Ãâ Ã³¸®
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ş¾ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
         if (inDamaged)
         {
             float val = Mathf.Sin(Time.time * 50);
@@ -102,11 +108,11 @@ public class PlayerController : MonoBehaviour
             {
                 gameObject.GetComponent<SpriteRenderer>().enabled = false;
             }
-            // ¡Ú Áß¿ä: ¿©±â¼­ returnÀ» ÇØ¾ß ¾Æ·¡ ÀÌµ¿ ÄÚµå°¡ ½ÇÇàµÇÁö ¾Ê°í ³Ë¹é(AddForce)ÀÌ ¸ÔÈû
+            // ï¿½ï¿½ ï¿½ß¿ï¿½: ï¿½ï¿½ï¿½â¼­ returnï¿½ï¿½ ï¿½Ø¾ï¿½ ï¿½Æ·ï¿½ ï¿½Ìµï¿½ ï¿½Úµå°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½Ë¹ï¿½(AddForce)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             return;
         }
 
-        // [¼öÁ¤] ´ë°¢¼± ÀÌµ¿ ½Ã »¡¶óÁü ¹æÁö (.normalized Ãß°¡)
+        // [ï¿½ï¿½ï¿½ï¿½] ï¿½ë°¢ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (.normalized ï¿½ß°ï¿½)
         rb.linearVelocity = new Vector2(axisH, axisV).normalized * sp;
     }
 
@@ -114,6 +120,13 @@ public class PlayerController : MonoBehaviour
     {
         axisH = h;
         axisV = v;
+        
+        // ëŒ€ê°ì„  ì´ë™ ë°©ì§€: ìˆ˜í‰ê³¼ ìˆ˜ì§ ì…ë ¥ì´ ë™ì‹œì— ìˆì„ ë•Œ ìˆ˜í‰ ìš°ì„ 
+        if (axisH != 0 && axisV != 0)
+        {
+            axisV = 0; // ìˆ˜ì§ ì…ë ¥ ë¬´ì‹œ
+        }
+        
         if (axisH == 0 && axisV == 0)
         {
             isMoving = false;
@@ -128,7 +141,7 @@ public class PlayerController : MonoBehaviour
     {
         float angle;
 
-        // [¼öÁ¤] Á÷¼± ÀÌµ¿ ½Ã¿¡µµ °¢µµ°¡ °»½ÅµÇµµ·Ï ||(OR)·Î º¯°æ
+        // [ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½Ã¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ÅµÇµï¿½ï¿½ï¿½ ||(OR)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (axisH != 0 || axisV != 0)
         {
             float dx = toPt.x - fromPt.x;
@@ -146,7 +159,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // ¹«Àû »óÅÂ°¡ ¾Æ´Ò ¶§¸¸ µ¥¹ÌÁö
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (collision.gameObject.CompareTag("Enemy") && !inDamaged)
         {
             GetDamage(collision.gameObject);
@@ -163,15 +176,15 @@ public class PlayerController : MonoBehaviour
 
         if (hp > 0)
         {
-            // ¡Ú [ÇÊ¼ö ¼öÁ¤] ³Ë¹é »óÅÂ ½ÃÀÛÀ» ¾Ë¸² (ÀÌ°Ô ¾ø¾î¼­ ³Ë¹éÀÌ ¾È µÆ´ø °Í)
+            // ï¿½ï¿½ [ï¿½Ê¼ï¿½ ï¿½ï¿½ï¿½ï¿½] ï¿½Ë¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½ (ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½î¼­ ï¿½Ë¹ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½)
             inDamaged = true;
 
-            // µ¥¹ÌÁö ¹ŞÀ» ½Ã ³Ë¹é
-            rb.linearVelocity = Vector2.zero; // ±âÁ¸ ¼Óµµ ÃÊ±âÈ­
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ë¹ï¿½
+            rb.linearVelocity = Vector2.zero; // ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ ï¿½Ê±ï¿½È­
             Vector2 toPos = (transform.position - enemy.transform.position).normalized;
-            rb.AddForce(toPos * 5f, ForceMode2D.Impulse); // ÈûÀ» 4 -> 5·Î ¾à°£ »óÇâ
+            rb.AddForce(toPos * 5f, ForceMode2D.Impulse); // ï¿½ï¿½ï¿½ï¿½ 4 -> 5ï¿½ï¿½ ï¿½à°£ ï¿½ï¿½ï¿½ï¿½
 
-            Invoke("DamageEnd", 0.5f); // ³Ë¹é ½Ã°£ 0.25 -> 0.5·Î Á¶Á¤
+            Invoke("DamageEnd", 0.5f); // ï¿½Ë¹ï¿½ ï¿½Ã°ï¿½ 0.25 -> 0.5ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
         else
         {
@@ -196,7 +209,7 @@ public class PlayerController : MonoBehaviour
         inDamaged = false;
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
 
-        // [Ãß°¡] ³Ë¹é ³¡³­ ÈÄ ¹Ì²ô·¯Áü ¹æÁö
+        // [ï¿½ß°ï¿½] ï¿½Ë¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì²ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         rb.linearVelocity = Vector2.zero;
     }
 }

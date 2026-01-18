@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class SaveData
 {
-    public int arrangeId = 0;       //¹èÄ¡ID
-    public string objTag = "";      //¹èÄ¡µÈ ¿ÀºêÁ§Æ® ÅÂ±×
+    public int arrangeId = 0;       //ï¿½ï¿½Ä¡ID
+    public string objTag = "";      //ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Â±ï¿½
 }
 
 [System.Serializable]
 public class SaveDataList
 {
-    public SaveData[] saveDatas;        //SaveData ¹è¿­
+    public SaveData[] saveDatas;        //SaveData ï¿½è¿­
 }
 
 public class SaveDataManager : MonoBehaviour
@@ -20,12 +20,14 @@ public class SaveDataManager : MonoBehaviour
 
     private void Start()
     {
-        //SaveDataList
-        arrangeDataList = new SaveDataList();
-        arrangeDataList.saveDatas = new SaveData[] { };
-        //TLsdlfma qnffjdhrl
+        //í˜„ì¬ ì”¬ ì´ë¦„ ê°€ì ¸ì˜¤ê¸°
         string stageName = PlayerPrefs.GetString("LastScene");
 
+        //SaveDataList ì´ˆê¸°í™” (í˜„ì¬ ì”¬ì˜ ì €ì¥ëœ ë°ì´í„°ë¡œ)
+        arrangeDataList = new SaveDataList();
+        arrangeDataList.saveDatas = new SaveData[] { };
+
+        //ì €ì¥ëœ ë°ì´í„° ë¶ˆëŸ¬ì˜¤ê¸°
         string data = PlayerPrefs.GetString(stageName);
 
         if (data != "")
@@ -44,24 +46,24 @@ public class SaveDataManager : MonoBehaviour
                     if (objTag == "Door")
                     {
                         Door door = obj.GetComponent<Door>();
-                        if(door.arrangeld == savedata.arrangeId)
+                        if(door != null && door.arrangeld == savedata.arrangeId)
                         {
-                            Destroy(door.gameObject);      //arrangeId°¡ °°´Ù¸é Á¦°Å
+                            Destroy(door.gameObject);      //arrangeIdï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½
                         }
                     }
                     else if(objTag == "ItemBox")
                     {
                         ItemBox box = obj.GetComponent<ItemBox>();
-                        if(box.arrangeld == savedata.arrangeId)
+                        if(box != null && box.arrangeld == savedata.arrangeId)
                         {
                             box.isClosed = false;
-                            box.GetComponent<SpriteRenderer>().sprite = box.openImage;      //Id°¡ °°´Ù¸é ¿­¸° »óÀÚ·Î
+                            box.GetComponent<SpriteRenderer>().sprite = box.openImage;      //Idï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú·ï¿½
                         }
                     }
                     else if (objTag == "Item")
                     {
                         ItemData item = obj.GetComponent<ItemData>();
-                        if(item.arrageId == savedata.arrangeId)
+                        if(item != null && item.arrageId == savedata.arrangeId)
                         {
                             Destroy(item.gameObject);
                         }
@@ -70,7 +72,9 @@ public class SaveDataManager : MonoBehaviour
                     else if( objTag == "Enemy")
                     {
                         EnemyController enemy = obj.GetComponent<EnemyController>();
-                        if(enemy.arrangeId == savedata.arrangeId)
+                        Enemy1Controller enemy1 = obj.GetComponent<Enemy1Controller>();
+                        if((enemy != null && enemy.arrangeId == savedata.arrangeId) || 
+                           (enemy1 != null && enemy1.arrangeId == savedata.arrangeId))
                         {
                             Destroy(obj);
                         }
@@ -82,42 +86,64 @@ public class SaveDataManager : MonoBehaviour
     }
 
 
-    // ¹èÄ¡ ID ¼³Á¤
+    // ï¿½ï¿½Ä¡ ID ï¿½ï¿½ï¿½ï¿½
     public static void SetArrangeld(int  arrangeld, string objTag)
     {
         if(arrangeld == 0 || objTag == "")
         {
-            //±â·ÏÇÏÁö ¾Ê´Â´Ù
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½
             return;
         }
 
-        //Ãß°¡ÇÏ±â ¹è¿­ÀÇ Å©±â¸¦ ÇÏ³ª ´õ Å©°Ô
+        //ï¿½ß°ï¿½ï¿½Ï±ï¿½ ï¿½è¿­ï¿½ï¿½ Å©ï¿½â¸¦ ï¿½Ï³ï¿½ ï¿½ï¿½ Å©ï¿½ï¿½
+        // arrangeDataListê°€ nullì´ë©´ ì´ˆê¸°í™”
+        if (arrangeDataList == null)
+        {
+            arrangeDataList = new SaveDataList();
+            arrangeDataList.saveDatas = new SaveData[] { };
+        }
+
+        // ì¤‘ë³µ ì²´í¬: ê°™ì€ arrangeIdì™€ objTagê°€ ì´ë¯¸ ìˆëŠ”ì§€ í™•ì¸
+        if (arrangeDataList.saveDatas != null)
+        {
+            for (int i = 0; i < arrangeDataList.saveDatas.Length; i++)
+            {
+                if (arrangeDataList.saveDatas[i].arrangeId == arrangeld && 
+                    arrangeDataList.saveDatas[i].objTag == objTag)
+                {
+                    // ì´ë¯¸ ì¡´ì¬í•˜ë©´ ì¶”ê°€í•˜ì§€ ì•ŠìŒ
+                    return;
+                }
+            }
+        }
+
         SaveData[] newSaveDatas = new SaveData[arrangeDataList.saveDatas.Length + 1];
 
         for(int i = 0; i < arrangeDataList.saveDatas.Length; i++)
         {
             newSaveDatas[i] = arrangeDataList.saveDatas[i];
         }
-        //SaveData ¸¸µé±â
+        //SaveData ï¿½ï¿½ï¿½ï¿½ï¿½
         SaveData savedata = new SaveData();
-        savedata.arrangeId = arrangeld;     //Id ±â·Ï
-        savedata.objTag = objTag;           //tag ±â·Ï
+        savedata.arrangeId = arrangeld;     //Id ï¿½ï¿½ï¿½
+        savedata.objTag = objTag;           //tag ï¿½ï¿½ï¿½
 
-        //SaveData Ãß°¡
+        //SaveData ï¿½ß°ï¿½
         //newSaveDatas[arrangeDataList.saveDatas.Length + 1] = savedata;
         newSaveDatas[arrangeDataList.saveDatas.Length] = savedata;
         arrangeDataList.saveDatas = newSaveDatas;
 
     }
 
-    // ±â·ÏµÈ µ¥ÀÌÅÍ ÀúÀå
+    // ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public static void SaveArrangeData(string stageName)
     {
-        if (arrangeDataList.saveDatas != null && stageName != "")
+        if (arrangeDataList != null && arrangeDataList.saveDatas != null && stageName != "")
         {
             string saveJson= JsonUtility.ToJson(arrangeDataList);
 
             PlayerPrefs.SetString(stageName, saveJson);
+            PlayerPrefs.Save(); // PlayerPrefs ì €ì¥ ë³´ì¥
         }
     }
 

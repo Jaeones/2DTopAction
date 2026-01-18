@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7121967447407119125}
   - component: {fileID: 5637231291606489757}
+  - component: {fileID: 1449895263857655627}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -48,10 +49,10 @@ MonoBehaviour:
   keyText: {fileID: 0}
   hpImage: {fileID: 0}
   lifeSprites:
-  - {fileID: -8770001503089466214, guid: 35b5425c83a57ed4499f301f234f7a25, type: 3}
-  - {fileID: 4974403084737825917, guid: 35b5425c83a57ed4499f301f234f7a25, type: 3}
-  - {fileID: -3859521769266734839, guid: 35b5425c83a57ed4499f301f234f7a25, type: 3}
-  - {fileID: 3111174479070320432, guid: 35b5425c83a57ed4499f301f234f7a25, type: 3}
+  - {fileID: -8619046075498376970, guid: 3a53a5255db1b734aa76a84b88b2fd1b, type: 3}
+  - {fileID: -1129074777737288347, guid: 3a53a5255db1b734aa76a84b88b2fd1b, type: 3}
+  - {fileID: 3629383467889928113, guid: 3a53a5255db1b734aa76a84b88b2fd1b, type: 3}
+  - {fileID: -2821432639765410480, guid: 3a53a5255db1b734aa76a84b88b2fd1b, type: 3}
   mainImage: {fileID: 0}
   resetButton: {fileID: 0}
   gameSprites:
@@ -59,3 +60,15 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ffa8f02b8b7691540a31286d809bd5f5, type: 3}
   inputPanel: {fileID: 0}
   retrySceneName: Main
+--- !u!114 &1449895263857655627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108761967260513794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b39cca19476ec0f4e9c0df5a8d27b44c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveDataManager

@@ -3,6 +3,7 @@ using UnityEngine;
 public class ArrowController : MonoBehaviour
 {
     public float deleteTime = 2;
+    public GameObject hitEffect;
 
 
     private void Start()
@@ -17,5 +18,7 @@ public class ArrowController : MonoBehaviour
 
         GetComponent<Collider2D>().enabled = false;
         GetComponent<Rigidbody2D>().simulated = false;
+        Instantiate(hitEffect, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }
